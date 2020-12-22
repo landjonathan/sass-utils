@@ -1,0 +1,13 @@
+=scrollable($x: false, $y: true)
+  @if ($y)
+    @if($y == hidden)
+      overflow-y: hidden
+    @else
+      overflow-y: auto
+
+  @if($x)
+    @if($x == hidden)
+      overflow-x: hidden
+    @else
+      overflow-x: auto
+  -webkit-overflow-scrolling: touch

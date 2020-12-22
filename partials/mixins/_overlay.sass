@@ -1,0 +1,34 @@
+@import positioning
+
+=overlay($opacity: 1, $color: #000, $image: false, $before: false, $blend-mode: normal)
+  $selector: after
+  @if ($before)
+    $selector: before
+
+  &:#{$selector}
+    content: ''
+    +full-size-absolute
+    z-index: 1
+    opacity: $opacity
+    mix-blend-mode: $blend-mode
+    @if ($image)
+      background-image: $image
+    @else
+      background-color: $color
+
+=gradient-map($color, $color-bottom: $color, $top-blend-mode: multiply, $bottom-blend-mode: screen, $opacity: 1)
+  +overlay($opacity: $opacity, $color: $color, $blend-mode: $top-blend-mode)
+  +overlay($opacity: $opacity, $color: $color-bottom, $blend-mode: $bottom-blend-mode, $before: true)
+
+=text-gradient($gradient, $fallback: currentColor, $resize: true)
+  color: $fallback
+
+  @supports (--custom: properties)
+    background-image: $gradient
+    color: transparent
+    //noinspection CssInvalidPropertyValue
+    background-clip: text
+    -webkit-background-clip: text
+
+    @if ($resize)
+      display: inline-block

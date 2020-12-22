@@ -1,0 +1,67 @@
+@import ../partials
+
+.visually-hidden
+  +visually-hidden
+
+.hidden
+  +hidden
+
+@for $i from 1 through 12
+  .col-#{$i}
+    +grid-width($i)
+
+.content
+  position: relative
+  +content-width
+  margin: 0 auto
+
+  .content
+    padding: 0
+
+  &.spaced
+    +flex-space
+
+  &.centered
+    +flex-center
+
+.bg,
+.bg-image
+  pointer-events: none
+  +full-size-absolute
+  z-index: 0
+
+  .image
+    +full-size-absolute
+
+.image,
+.bg-image
+  img, svg
+    width: 100%
+    height: 100%
+    object-fit: cover
+
+.bg-video
+  pointer-events: none
+  +full-size-absolute
+  z-index: 0
+  box-sizing: border-box
+  overflow: hidden
+
+  video
+    object-fit: cover
+    width: 100%
+    height: 100%
+
+    +browser-edge
+      width: 100%
+      height: auto
+
+.bg.panoramic
+  overflow: hidden
+
+  .bg-image
+    width: calc(var(--factor, 2) * 100%)
+    animation: pano calc(var(--durations, var(--factor, 2) * var(--base-duration, 120s)) * 1s) ease-out forwards // duration or factor * base-duration
+    @keyframes pano
+      to
+        transform: translateX(-50%)

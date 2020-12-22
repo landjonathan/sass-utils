@@ -1,0 +1,59 @@
+// private utils
+
+@function -stagger-delay-value($calc, $i, $ease-factor, $step, $base)
+  @if ($calc)
+    @return calc(#{$i - ($i - 1) * $ease-factor} * #{$step} + #{$base})
+  @else
+    @return #{($i - ($i - 1) * $ease-factor) * $step + $base}
+
+=-stagger-delay-property($type, $calc, $i, $ease-factor, $step, $base)
+  #{$type}-delay: -stagger-delay-value($calc, $i, $ease-factor, $step, $base)
+
+=-stagger-child-selector($data, $reverse, $i, $child)
+  @if ($data)
+    &[#{$data}="#{$i}"]#{$child}
+      @content
+
+  @else if ($reverse)
+    &:nth-last-child(#{$i})#{$child}
+      @content
+
+  @else
+    &:nth-child(#{$i})#{$child}
+      @content
+
+
+
+
+// public mixin
+
+=stagger($count, $step, $base: 0s, $reverse: false, $data: false, $type: transition, $child: '', $linear: false, $ease-factor: 0.33, $calc: false, $pseudo: false)
+
+  $start: 1
+
+  @if ($linear)
+    $ease-factor: 0
+
+  @if ($data == true)
+    $data: data-stagger-index
+  @else if ($data != false)
+    $data: data- + unquote($data)
+
+  @if ($pseudo == 'before')
+    $child: ':before'
+  @else if ($pseudo == 'after')
+    $child: ':after'
+  @else
+    $child: #{unquote(' ') unquote($child)}
+
+  // default to max ( $count )
+  @if $child
+    &#{$child}
+      +-stagger-delay-property($type, $calc, $count, $ease-factor, $step, $base)
+  @else
+    +-stagger-delay-property($type, $calc, $count, $ease-factor, $step, $base)
+
+  // loop children and set property
+  @for $i from $start through $count
+    +-stagger-child-selector($data, $reverse, $i, $child)
+      +-stagger-delay-property($type, $calc, $i, $ease-factor, $step, $base)

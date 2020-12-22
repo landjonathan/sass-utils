@@ -1,0 +1,35 @@
+=full-size($inset: 0, $auto: false)
+  top: if($auto == top, auto, $inset)
+  bottom: if($auto == bottom, auto, $inset)
+  left: if($auto == left, auto, $inset)
+  right: if($auto == right, auto, $inset)
+
+=full-size-absolute($inset: 0, $auto: false)
+  +full-size($inset, $auto)
+  position: absolute
+
+=full-size-fixed($inset: 0, $auto: false)
+  +full-size($inset, $auto)
+  position: fixed
+
+=full-size-sticky($inset: 0, $auto: bottom)
+  +full-size($inset, $auto)
+  position: sticky
+
+=flex-center($direction: column, $items: center)
+  display: flex
+  flex-direction: $direction
+  justify-content: center
+  align-items: $items
+
+=flex-space($direction: row, $items: center)
+  display: flex
+  flex-direction: $direction
+  justify-content: space-between
+  align-items: $items
+
+=flex-columns($cols: 2)
+  display: flex
+
+  > *
+    flex: (100 / $cols * 1%) 0 0
