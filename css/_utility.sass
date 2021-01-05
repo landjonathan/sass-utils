@@ -65,3 +65,11 @@
     @keyframes pano
       to
         transform: translateX(-50%)
+
+.horizontal-scroll-container
+  +scrollable(true, hidden)
+  padding-left: calc(#{grid-padding()} + #{$grid-gutter-width})
+
+  ul li:last-of-type
+    padding-right: calc(#{grid-padding()} + #{$grid-gutter-width})
+    box-sizing: content-box
