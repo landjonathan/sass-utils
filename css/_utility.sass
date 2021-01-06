@@ -79,3 +79,58 @@
 
     +smaller-than-grid
       padding-right: $grid-gutter-width
+
+.field
+  position: relative
+  display: block
+  --padding: .25em
+
+  input, textarea, button, select
+    background-color: transparent
+    padding: var(--padding)
+    width: 100%
+    border: none
+    color: inherit
+    margin: 0
+
+  select
+    margin-top: 2px
+
+  &.select
+    &:after
+      content: ''
+      display: block
+      position: absolute
+      right: .25em
+      top: .25em
+      width: .5em
+      height: .5em
+      border: solid 1px currentColor
+      border-top: transparent
+      border-left: transparent
+      transform: rotate(45deg)
+
+  input, textarea
+    &:not(:placeholder-shown),
+    &:focus
+      ~ span
+        +hidden
+
+    &:required
+      ~ span
+        &:after
+          content: '*'
+          display: inline-block
+          margin-left: .15em
+
+  select:valid
+    ~ span
+      +hidden
+
+  span
+    position: absolute
+    left: 0
+    padding: var(--padding)
+    transition: $transition-quick
+    pointer-events: none
+
