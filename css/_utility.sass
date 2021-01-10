@@ -92,6 +92,7 @@
     border: none
     color: inherit
     margin: 0
+    display: block
 
   select
     margin-top: 2px
@@ -114,7 +115,8 @@
     &:not(:placeholder-shown),
     &:focus
       ~ span
-        +hidden
+        //+hidden
+        transform: var(--label-transform, translateY(-33%) scale(.67))
 
     &:required
       ~ span
@@ -125,12 +127,14 @@
 
   select:valid
     ~ span
-      +hidden
+      transform: var(--label-transform, translateY(-33%) scale(.67)) //+hidden
 
   span
     position: absolute
     left: 0
+    top: 0
     padding: var(--padding)
     transition: $transition-quick
     pointer-events: none
+    transform-origin: top left
 
