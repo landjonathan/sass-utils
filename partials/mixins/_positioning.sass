@@ -28,8 +28,24 @@
   justify-content: space-between
   align-items: $items
 
-=flex-columns($cols: 2)
+=flex-columns($cols: 2, $gap: false)
   display: flex
+  flex-wrap: wrap
+
+  @if ($gap == auto and $grid-gutter-width)
+    $gap: $grid-gutter-width
 
   > *
-    flex: (100 / $cols * 1%) 0 0
+    @if ($gap)
+      flex: calc(#{(100 / $cols * 1%)} - #{($gap / $cols * ($cols - 1))}) 0 0
+      margin-left: $gap / 2
+      margin-right: $gap / 2
+
+      &:nth-child(#{$cols}n - #{$cols - 1})
+        margin-left: 0
+
+      &:nth-child(#{$cols}n)
+        margin-right: 0
+
+    @else
+      flex: (100 / $cols * 1%) 0 0
