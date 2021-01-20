@@ -1,7 +1,10 @@
 //noinspection CssOverwrittenProperties
-=scroll-height-auto
+=scroll-height-auto($init: false)
   height: auto
-  height: var(--scroll-height, auto)
+  @if ($init)
+    height: var(--scroll-height, $init)
+  @else
+    height: var(--scroll-height, auto)
 
 //noinspection CssOverwrittenProperties
 =window-height-100vh
