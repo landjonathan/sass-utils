@@ -60,5 +60,5 @@
           margin-right: 0
 
     @else
-      --width: (100 / $cols * 1%)
+      --width: calc(100 / #{$cols} * 1%)
       flex: var(--width) 0 0
