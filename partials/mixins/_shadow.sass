@@ -9,7 +9,7 @@
 /// $sharpness    float   opacity factor -- positive value lowers opacity from step to step
 /// $blur-factor  float   multiplies the blur for each step
 
-=shadow($steps: 6, $blur: .25, $opacity: .12, $color: #000, $h: 0, $v: 1, $unit: 'px', $sharpness: 0, $blur-factor: 1)
+=shadow($steps: 6, $blur: .25, $opacity: .12, $color: #000, $h: 0, $v: 1, $unit: 'px', $sharpness: 0, $blur-factor: 1, $filter: false)
 
   // normalization
   @if $opacity > 1
@@ -40,10 +40,16 @@
       $o: 1
 
     // create the new shadow and append it to the stack
-    $stack: append($stack, shadow($s, $s * 1 * $blur-factor, $o, $color, $h, $v, $unit), comma)
+    @if ($filter)
+      $stack: append($stack, drop-shadow(shadow($s, $s * 1 * $blur-factor, $o, $color, $h, $v, $unit)), space)
+    @else
+      $stack: append($stack, shadow($s, $s * 1 * $blur-factor, $o, $color, $h, $v, $unit), comma)
 
   // once stack is complete, echo it to CSS. Done!
-  box-shadow: $stack
+  @if ($filter)
+    filter: $stack
+  @else
+    box-shadow: $stack
 
 // single shadow function, used to constuct a shadow string for each step
 // i.e. 0 2px 4px #000
