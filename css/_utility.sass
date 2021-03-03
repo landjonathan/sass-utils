@@ -118,7 +118,7 @@
         //+hidden
         transform: var(--label-transform, translateY(-33%) scale(.67))
 
-    &:required
+    &:required, &[aria-required='true']
       ~ span
         &:after
           content: '*'
