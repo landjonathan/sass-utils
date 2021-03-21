@@ -1,9 +1,9 @@
 =hover
-  html:not(.mobile):not(.tablet) &
+  @media (hover: hover)
     &:hover
       @content
 
-=focused
+=focus-or-hover
   +hover
     @content
   &:focus
