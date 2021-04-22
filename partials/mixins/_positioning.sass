@@ -1,8 +1,8 @@
 =full-size($inset: 0, $auto: false)
-  top: if($auto == top, auto, $inset)
-  bottom: if($auto == bottom, auto, $inset)
-  left: if($auto == left, auto, $inset)
-  right: if($auto == right, auto, $inset)
+  top: if(index($auto, top), auto, $inset)
+  bottom: if(index($auto, bottom), auto, $inset)
+  left: if(index($auto, left), auto, $inset)
+  right: if(index($auto, right), auto, $inset)
 
 =full-size-absolute($inset: 0, $auto: false)
   +full-size($inset, $auto)
