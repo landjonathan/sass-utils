@@ -1,19 +1,21 @@
-=full-size($inset: 0, $auto: false)
-  top: if(index($auto, top), auto, $inset)
-  bottom: if(index($auto, bottom), auto, $inset)
-  left: if(index($auto, left), auto, $inset)
-  right: if(index($auto, right), auto, $inset)
+=full-size($inset: 0, $auto: false, $null: false)
+  $sides: top, bottom, left, right
+  @each $side in $sides
+    // if side isn't in $null
+    @if not (index($null, $side))
+      // set to auto is side is in $auto, else set to $inset
+      #{$side}: if(index($auto, $side), auto, $inset)
 
-=full-size-absolute($inset: 0, $auto: false)
-  +full-size($inset, $auto)
+=full-size-absolute($inset: 0, $auto: false, $null: false)
+  +full-size($inset, $auto, $null)
   position: absolute
 
-=full-size-fixed($inset: 0, $auto: false)
-  +full-size($inset, $auto)
+=full-size-fixed($inset: 0, $auto: false, $null: false)
+  +full-size($inset, $auto, $null)
   position: fixed
 
-=full-size-sticky($inset: 0, $auto: bottom)
-  +full-size($inset, $auto)
+=full-size-sticky($inset: 0, $auto: false, $null: bottom)
+  +full-size($inset, $auto, $null)
   position: sticky
 
 =flex-center($direction: column, $items: center)
