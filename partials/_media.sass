@@ -112,3 +112,22 @@ $large: 1920px !default
   @media not all and (min-resolution: .001dpcm)
     @supports (-webkit-appearance: none)
       @content
+
+
+// user preferences
+
+=dark
+  @media (prefers-color-scheme: dark)
+    @content
+
+=light
+  @media (prefers-color-scheme: light)
+    @content
+
+=motion
+  @media (prefers-reduced-motion: no-preference)
+    @content
+
+=reduced-motion
+  @media (prefers-reduced-motion: reduce)
+    @content
