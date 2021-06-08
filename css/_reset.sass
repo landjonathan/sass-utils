@@ -48,6 +48,9 @@ input, textarea, button, select
   &:focus:not(:focus-visible)
     outline: none
 
+label
+  cursor: pointer
+
 select option
   color: initial
 
@@ -83,3 +86,13 @@ img, svg, picture
   width: 100%
   height: auto
   display: block
+
+blockquote
+  quotes: '"' '"' '"' '"'
+
+  p
+    &:before
+      content: open-quote
+
+    &:last-of-type:after
+      content: close-quote
