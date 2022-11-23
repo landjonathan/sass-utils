@@ -61,7 +61,7 @@
 
   .bg-image
     width: calc(var(--factor, 2) * 100%)
-    animation: pano calc(var(--durations, var(--factor, 2) * var(--base-duration, 120s)) * 1s) ease-out forwards // duration or factor * base-duration
+    animation: pano calc(var(--durations, calc(var(--factor, 2) * var(--base-duration, 120s))) * 1s) ease-out forwards // duration or factor * base-duration
     @keyframes pano
       to
         transform: translateX(-50%)
